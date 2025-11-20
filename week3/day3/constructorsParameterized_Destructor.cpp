@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <limits>
 using namespace std;
 class DOG{
     string name;
@@ -10,6 +11,11 @@ DOG(string n, int a){
     age = a;
     cout << "Dog's Name: " << name << ", Age: " << age << " years." << endl;
 }
+DOG(const DOG &obj){
+    name=obj.name;
+    age=obj.age;    
+    cout << "Copy Constructor called. Dog's Name: " << name << ", Age: " << age << " years." << endl; // Display copied dog
+}
 ~DOG(){
     cout << "Destructor called for dog: " << name << endl;
 }
@@ -19,7 +25,7 @@ class Book{
 public:
 Book(){
     cout << "Enter title: ";
-        cin.ignore();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         getline(cin, title);
         cout << "Enter author: ";
         getline(cin, author);
@@ -43,6 +49,8 @@ int main(){
     Book b1, b2;  // Object creation which invokes parameterized constructor
 DOG d1("Buddy", 3);
 DOG d2("Max", 5);
+DOG d3=d2; // Copy constructor invoked
+
     return 0;
 
 }
